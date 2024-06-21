@@ -9,7 +9,7 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
-import css from "./MovieDetailPage.module.css";
+import css from "./MovieDetailsPage.module.css";
 
 const getLinkCss = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);

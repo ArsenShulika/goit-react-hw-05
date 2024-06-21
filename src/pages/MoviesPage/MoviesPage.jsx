@@ -7,7 +7,6 @@ import { useSearchParams } from "react-router-dom";
 export default function MoviesPage() {
   const [dataMovies, setDataMovies] = useState([]);
   const [isLoader, setIsLoader] = useState(false);
-  // const [isError, setIsError] = useState(false);
   const [searchParam, setSearchParam] = useSearchParams();
   const queryMovie = searchParam.get("query") ?? "";
 
@@ -18,7 +17,6 @@ export default function MoviesPage() {
       }
       try {
         setIsLoader(true);
-        // setIsError(false);
         const data = await getSearchMovie(queryMovie);
         console.log(data);
         setDataMovies(data.results);

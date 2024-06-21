@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { fetchMovieById } from "../../movies-api";
 import clsx from "clsx";
 
@@ -19,10 +19,11 @@ const MovieDetailPage = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const { movieId } = useParams();
   const [loading, setLoading] = useState(false);
-
   const location = useLocation();
 
-  const backLink = location.state?.from ?? "/";
+  const backLinkRef = useRef(location.state ?? "/movies");
+  // const backLink = location.state ?? "/";
+  console.log(location);
 
   const defaultImg =
     "<https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg>";
@@ -48,7 +49,7 @@ const MovieDetailPage = () => {
       {movieDetails && (
         <div>
           <button className={css.btn}>
-            <Link to={backLink}>Go back</Link>
+            <Link to={backLinkRef.current}>Go back</Link>
           </button>
           <div className={css.container}>
             <img
@@ -97,8 +98,9 @@ const MovieDetailPage = () => {
           </NavLink>
         </li>
       </ul>
-
-      <Outlet></Outlet>
+      <Suspense fallback={<div>Loading more...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

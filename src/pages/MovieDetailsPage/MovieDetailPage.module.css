@@ -1,5 +1,6 @@
 .container {
     display: flex;
+    margin-bottom: 30px;
 }
 
 .btn {
@@ -15,4 +16,21 @@
 
 .subtitle {
     font-size: 20px;
+}
+
+.list {
+    display: flex;
+    gap: 40px;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.link {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.active {
+    color: rgb(79, 147, 241);
+
 }

@@ -1,13 +1,39 @@
+import { useParams } from "react-router-dom";
+import { getReviews } from "../../movies-api";
+import { useEffect, useState } from "react";
+
 export default function MovieReviews() {
+  const [movieReviews, setMovieReviews] = useState([]);
+  const { movieId } = useParams();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    async function fetchMovieReviews() {
+      try {
+        const data = await getReviews(movieId);
+        console.log(data);
+        setMovieReviews(data.results);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchMovieReviews();
+  }, [movieId]);
+
   return (
-    <p>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit voluptates
-      repellat maiores, aliquid magni accusamus tempora soluta! Excepturi iure
-      quidem quia minus voluptatem distinctio nemo exercitationem eius,
-      recusandae voluptate! Molestiae mollitia quaerat quia in cum deleniti
-      aspernatur quisquam reprehenderit, sapiente assumenda enim animi
-      reiciendis recusandae natus libero saepe cupiditate tenetur excepturi id
-      veritatis. Quam sunt optio sint amet necessitatibus.
-    </p>
+    <>
+      {loading && <b>Loading Movie reviews...</b>}
+      <ul>
+        {movieReviews.length > 0 &&
+          movieReviews.map((movieReview) => (
+            <li key={movieReview.id}>
+              <h2>{movieReview.author}</h2>
+              <p>{movieReview.content}</p>
+            </li>
+          ))}
+      </ul>
+    </>
   );
 }

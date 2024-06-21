@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchMovieById } from "../../movies-api";
+import clsx from "clsx";
 
 import {
   Link,
@@ -9,6 +10,10 @@ import {
   useParams,
 } from "react-router-dom";
 import css from "./MovieDetailPage.module.css";
+
+const getLinkCss = ({ isActive }) => {
+  return clsx(css.link, isActive && css.active);
+};
 
 const MovieDetailPage = () => {
   const [movieDetails, setMovieDetails] = useState(null);
@@ -80,12 +85,16 @@ const MovieDetailPage = () => {
 
       {/* рендерить вкладену навігацію до мартшрутів /movies/:movieId/cast та  /movies/:movieId/reviews*/}
 
-      <ul>
-        <li>
-          <NavLink to="cast">MovieCast</NavLink>
+      <ul className={css.list}>
+        <li className={css.link}>
+          <NavLink className={getLinkCss} to="cast">
+            MovieCast
+          </NavLink>
         </li>
         <li>
-          <NavLink to="reviews">MovieRewievs</NavLink>
+          <NavLink className={getLinkCss} to="reviews">
+            MovieReviews
+          </NavLink>
         </li>
       </ul>
 

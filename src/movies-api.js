@@ -24,4 +24,20 @@ const getSearchMovie = async (query) => {
   return response.data;
 };
 
-export { getTrandingMovies, fetchMovieById, getSearchMovie };
+const getMovieCast = async (movieId) => {
+  const response = await axios.get(`3/movie/${movieId}/credits`, options);
+  return response.data;
+};
+
+const getReviews = async (movieId) => {
+  const response = await axios.get(`3/movie/${movieId}/reviews`, options);
+  return response.data;
+};
+
+export {
+  getTrandingMovies,
+  fetchMovieById,
+  getSearchMovie,
+  getMovieCast,
+  getReviews,
+};

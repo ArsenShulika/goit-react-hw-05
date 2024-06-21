@@ -1,0 +1,17 @@
+.container {
+
+    display: flex;
+}
+
+.descr {
+    margin-left: 20px;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+}
+
+.list {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}

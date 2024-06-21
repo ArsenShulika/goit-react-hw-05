@@ -21,7 +21,7 @@ export default function MoviesPage() {
         // setIsError(false);
         const data = await getSearchMovie(queryMovie);
         console.log(data);
-        setDataMovies(data);
+        setDataMovies(data.results);
       } catch (error) {
         console.log(error);
         // setIsError(true);
@@ -32,8 +32,8 @@ export default function MoviesPage() {
     fetchMovies();
   }, [queryMovie]);
 
-  const handleSearch = async (query) => {
-    searchParam.set("query", query);
+  const handleSearch = async (queryMovie) => {
+    searchParam.set("query", queryMovie);
     setSearchParam(searchParam);
     setDataMovies([]);
   };
